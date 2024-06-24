@@ -16,9 +16,7 @@ export default function TextForm(props) {
   const handleCamelCase = () => {
     const arr = text.trim().split(" ");
     const arr2 = arr.map((element) => {
-      return (
-        element.charAt(0).toUpperCase() + element.substring(1, element.length)
-      );
+      return element.charAt(0).toUpperCase() + element.substring(1, element.length);
     });
     updateText(arr2.join(" "));
   };
@@ -32,7 +30,7 @@ export default function TextForm(props) {
       <div
         className="container"
         style={{
-          color: props.mode === "light" ? "black" : "white",
+          color: props.theme.text,
         }}
       >
         <div className="mb-3">
@@ -40,10 +38,6 @@ export default function TextForm(props) {
             {props.heading}
           </label>
           <textarea
-            style={{
-              backgroundColor: props.mode === "light" ? "white" : "grey",
-              color: props.mode === "light" ? "black" : "white",
-            }}
             className="form-control"
             onChange={changeTextFun}
             value={text}
@@ -52,23 +46,23 @@ export default function TextForm(props) {
           ></textarea>
         </div>
         <div className="my-3">
-        <button className="btn btn-primary" onClick={handleUpperCase}>
-          UPPERCASE
-        </button>
+          <button className={`btn btn-${props.theme.button}`} onClick={handleUpperCase}>
+            UPPERCASE
+          </button>
 
-        <button className="btn btn-primary mx-3" onClick={handleLowerCase}>
-          lowercase
-        </button>
+          <button className={`btn btn-${props.theme.button} mx-3`} onClick={handleLowerCase}>
+            lowercase
+          </button>
 
-        <button className="btn btn-primary mx-3" onClick={handleCamelCase}>
-          Camelcase
-        </button>
+          <button className={`btn btn-${props.theme.button} mx-3`} onClick={handleCamelCase}>
+            Camelcase
+          </button>
         </div>
       </div>
       <div
         className="container my-2"
         style={{
-          color: props.mode === "light" ? "black" : "white",
+          color: props.theme.text,
         }}
       >
         <h2> Text Summary </h2>
@@ -83,5 +77,5 @@ export default function TextForm(props) {
 
 TextForm.propTypes = {
   heading: PropTypes.string.isRequired,
-  mode: PropTypes.string.isRequired,
+  theme: PropTypes.object.isRequired,
 };
