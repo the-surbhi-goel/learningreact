@@ -16,7 +16,9 @@ export default function TextForm(props) {
   const handleCamelCase = () => {
     const arr = text.trim().split(" ");
     const arr2 = arr.map((element) => {
-       return  element.charAt(0).toUpperCase() + element.substring(1, element.length);
+      return (
+        element.charAt(0).toUpperCase() + element.substring(1, element.length)
+      );
     });
     updateText(arr2.join(" "));
   };
@@ -27,12 +29,21 @@ export default function TextForm(props) {
 
   return (
     <>
-      <div className="container">
+      <div
+        className="container"
+        style={{
+          color: props.mode === "light" ? "black" : "white",
+        }}
+      >
         <div className="mb-3">
           <label htmlFor="myBox" className="form-label">
             {props.heading}
           </label>
           <textarea
+            style={{
+              backgroundColor: props.mode === "light" ? "white" : "grey",
+              color: props.mode === "light" ? "black" : "white",
+            }}
             className="form-control"
             onChange={changeTextFun}
             value={text}
@@ -40,22 +51,31 @@ export default function TextForm(props) {
             rows="5"
           ></textarea>
         </div>
-        <button className="btn btn-primary m-3" onClick={handleUpperCase}>
+        <div className="my-3">
+        <button className="btn btn-primary" onClick={handleUpperCase}>
           UPPERCASE
         </button>
 
-        <button className="btn btn-primary m-3" onClick={handleLowerCase}>
+        <button className="btn btn-primary mx-3" onClick={handleLowerCase}>
           lowercase
         </button>
 
-        <button className="btn btn-primary m-3" onClick={handleCamelCase}>
+        <button className="btn btn-primary mx-3" onClick={handleCamelCase}>
           Camelcase
         </button>
+        </div>
       </div>
-      <div className="container my-2">
+      <div
+        className="container my-2"
+        style={{
+          color: props.mode === "light" ? "black" : "white",
+        }}
+      >
         <h2> Text Summary </h2>
-        <p> {text.trim().split(' ').length} words and {text.length} characters </p>
-        <p>{0.008 * text.trim().split(' ').length} Minutes to read</p>
+        <p>
+          {text.trim().split(" ").length} words and {text.length} characters{" "}
+        </p>
+        <p>{0.008 * text.trim().split(" ").length} Minutes to read</p>
       </div>
     </>
   );
@@ -63,4 +83,5 @@ export default function TextForm(props) {
 
 TextForm.propTypes = {
   heading: PropTypes.string.isRequired,
+  mode: PropTypes.string.isRequired,
 };
